@@ -11,6 +11,7 @@
 #---------------------------------------FONCTIONS--------------------------------------------
 
 
+
 # Fonction qui retourne en fonction du mois entré une valeur definit
 def ajouteMois(leMois):
     temp = ['0','3','3','6','1','4','6','2','5','0','3','5']
@@ -19,11 +20,11 @@ def ajouteMois(leMois):
 
 # Fonction de PREDICAT qui retourne si l'année est bissextile ou non
 def bissextile(lAnnee):
-    if lAnnee % 400 == 0: # Si l'année est divisible par 400
+    if int(lAnnee) % 400 == 0: # Si l'année est divisible par 400
         return True
-    elif lAnneeannee % 100 == 0: # Si l'année est divisible par 100
+    elif int(lAnnee) % 100 == 0: # Si l'année est divisible par 100
         return False
-    elif lAnneennee % 4 == 0: # Si l'années est divisible par 4
+    elif int(lAnnee) % 4 == 0: # Si l'années est divisible par 4
         return True
 
 
@@ -56,7 +57,7 @@ def affichageFinal(monChiffre):
     elif (monChiffre == 3):
         print("Le ", dateUser, " était un Mercredi !")
     elif (monChiffre == 4):
-        print("Le ",dateUser," était un Jeudi !")
+        print("Le ", dateUser," était un Jeudi !")
     elif (monChiffre == 5):
         print("Le ", dateUser, " était un Vendredi !")
     elif (monChiffre == 6):
@@ -76,6 +77,7 @@ while True:
     else:
        break
 
+calculus = 0
 
 # On sépare notre chaine dans differentes variables Année / mois / jour
 monAnnee = int(dateUser[6:10])
@@ -86,13 +88,12 @@ monJour = int(dateUser[0:2])
 # ETAPE 1 : On garde les deux derniers chiffres de l'année :
 deuxAnnee = int(dateUser[8:10])
 
-
+calculus = int(deuxAnnee)
 # ETAPE 2 : On ajoute 1/4 de ce chiffre en ignorant le reste :
-calculus = deuxAnnee/4
-
+calculus += int(deuxAnnee/4)
 
 # ETAPE 3 : On ajoute la journée du mois :
-calculus += monJour
+calculus += int(monJour)
 
 
 # ETAPE 4 : Selon le mois on ajoute un chiffre definit dans la fonction ajouteMois() :
@@ -100,8 +101,8 @@ calculus += int(ajouteMois(monMois))
 
 
 # ETAPE 5 : Si l'année est bissextile (vérifié par la fonction bissextile() et le mois est janvier ou février, on ôte 1 :
-if ((monMois == '01') or (monMois == '02') and bissextile(monAnnee)):
-    calculus -= 1
+if bissextile(monAnnee) and int(monMois) == 1 or int(monMois) == 2 :
+    calculus = int(calculus - 1)
 
 
 # ETAPE 6 : Selon le siècle, on ajoute un chiffre definit dans la fonction ajouteSiecle():
